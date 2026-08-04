@@ -1,4 +1,4 @@
-/* PptxGenJS 4.0.1-adcredo.2 @ 2026-08-04T11:35:38.864Z */
+/* PptxGenJS 4.0.1-adcredo.3 @ 2026-08-04T11:37:19.041Z */
 'use strict';
 
 var JSZip = require('jszip');

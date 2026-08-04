@@ -1,4 +1,4 @@
-/* PptxGenJS 4.0.1 @ 2025-06-25T23:35:35.098Z */
+/* PptxGenJS 4.0.1 @ 2026-08-04T10:11:16.353Z */
 import JSZip from 'jszip';
 
 /******************************************************************************
@@ -3074,7 +3074,11 @@ function createExcelWorksheet(chartObject, zip) {
                     });
                 }
                 else {
-                    strTableXml += `<table xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" id="1" name="Table1" displayName="Table1" ref="A1:${getExcelColName(data.length + data[0].labels.length)}${data[0].labels[0].length + 1}'" totalsRowShown="0">`;
+                    strTableXml +=
+                        '<table xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" id="1" name="Table1" displayName="Table1" ref="A1:' +
+                            getExcelColName(data.length + data[0].labels.length) +
+                            (data[0].labels[0].length + 1) +
+                            '" totalsRowShown="0">';
                     strTableXml += `<tableColumns count="${data.length + data[0].labels.length}">`;
                     data[0].labels.forEach((_labelsGroup, idx) => {
                         strTableXml += `<tableColumn id="${idx + 1}" name="Column${idx + 1}"/>`;
@@ -6328,7 +6332,7 @@ function makeXmlContTypes(slides, slideLayouts, masterSlide) {
     strXml += '<Default Extension="xml" ContentType="application/xml"/>';
     strXml += '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>';
     strXml += '<Default Extension="jpeg" ContentType="image/jpeg"/>';
-    strXml += '<Default Extension="jpg" ContentType="image/jpg"/>';
+    strXml += '<Default Extension="jpg" ContentType="image/jpeg"/>';
     strXml += '<Default Extension="svg" ContentType="image/svg+xml"/>';
     // STEP 1: Add standard/any media types used in Presentation
     strXml += '<Default Extension="png" ContentType="image/png"/>';
@@ -6347,8 +6351,8 @@ function makeXmlContTypes(slides, slideLayouts, masterSlide) {
     // STEP 2: Add presentation and slide master(s)/slide(s)
     strXml += '<Override PartName="/ppt/presentation.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"/>';
     strXml += '<Override PartName="/ppt/notesMasters/notesMaster1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.notesMaster+xml"/>';
+    strXml += '<Override PartName="/ppt/slideMasters/slideMaster1.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideMaster+xml"/>';
     slides.forEach((slide, idx) => {
-        strXml += `<Override PartName="/ppt/slideMasters/slideMaster${idx + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slideMaster+xml"/>`;
         strXml += `<Override PartName="/ppt/slides/slide${idx + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>`;
         // Add charts if any
         slide._relsChart.forEach(rel => {

@@ -2041,7 +2041,6 @@ function createLineCap (lineCap: ChartLineCap): string {
 		return 'rnd'
 	} else {
 		const neverLineCap: never = lineCap
-		// eslint-disable-next-line @typescript-eslint/restrict-template-expressions
 		throw new Error(`Invalid chart line cap: ${neverLineCap}`)
 	}
 }
